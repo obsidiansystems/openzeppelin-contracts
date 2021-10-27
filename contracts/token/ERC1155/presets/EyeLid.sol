@@ -21,11 +21,11 @@ import "../../../access/Ownable.sol";
 
 contract EyeLid is EyeCon, Ownable {
     uint256 private NFT_id = 0; 
-    uint256[] private qty = [10000000, 1]; 
     uint256 private _world_pop = 0;
-    uint256[] private ids = [0, NFT_id];
-    uint256 private _price = 79000000000000000;
     address payable private _artist;
+    uint256 private _price = 79000000000000000;
+    uint256[] private qty = [10000000, 1]; 
+    uint256[] private ids = [0, 0];
     constructor(string memory uri)
         EyeCon(uri)
     {
@@ -41,6 +41,7 @@ contract EyeLid is EyeCon, Ownable {
         require(msg.value >= _price, "EyeLid: please include the current price with your request");
             NFT_id ++;
             address buyer = _msgSender();
+            ids = [0, NFT_id];
             mintBatch(buyer, ids, qty, "");
             _artist.transfer(msg.value);
             return NFT_id;
