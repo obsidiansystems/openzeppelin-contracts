@@ -38,11 +38,11 @@ contract EyeLid is EyeCon, Ownable {
         require(NFT_id < worldPop(), "EyeLid: world population set too low to mint more");
 
         //Require mint_eyecon to include the current price
-//        require(msg.value >= _price, "EyeLid: please include the current price with your request");
+        require(msg.value >= _price, "EyeLid: please include the current price with your request");
             NFT_id ++;
             address buyer = _msgSender();
             ids = [0, NFT_id];
-            super.mintBatch(buyer, ids, qty, "");
+            _mintBatch(buyer, ids, qty, "");
             _artist.transfer(msg.value);
             return NFT_id;
     }
